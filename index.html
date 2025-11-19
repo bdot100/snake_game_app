@@ -1,0 +1,49 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Classic Snake</title>
+    <!-- Page styles -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main>
+      <!-- Page title / header -->
+      <h1>Classic Snake</h1>
+
+      <!-- HUD: score, high score and small status text. Updated by JS. -->
+      <div class="hud">
+        <div id="score">Score: 0</div>
+        <!-- High score will be loaded from localStorage and updated by JS -->
+        <div id="highscore">High Score: 0</div>
+        <div id="status">Press Arrow keys or WASD to start</div>
+      </div>
+
+   <!-- The game canvas. Rendering is done in `src/game.js`.
+     Reduced default backing size to make the visible box smaller. CSS further constrains the displayed size. -->
+   <canvas id="game" width="480" height="480" aria-label="Snake game"></canvas>
+
+      <!-- Controls to pause/restart and toggle edge wrapping. Buttons are wired by JS. -->
+      <div class="controls">
+        <button id="btn-pause">Pause</button>
+        <button id="btn-restart">Restart</button>
+        <label><input id="wrap" type="checkbox"> Wrap edges</label>
+      </div>
+
+      <!-- Small help section describing controls. Static documentation for the player. -->
+      <section class="help">
+        <h2>Controls</h2>
+        <ul>
+          <li>Arrow keys or WASD — change direction (no immediate 180° reverse)</li>
+          <li>P — pause / resume</li>
+          <li>R — restart</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Load the game logic. Kept as a plain script for simplicity (no build step). -->
+    <script src="src/game.js"></script>
+  </body>
+</html>

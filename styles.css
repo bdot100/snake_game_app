@@ -1,0 +1,82 @@
+
+/*
+  styles.css — simple styling for the Snake demo
+
+  Notes:
+  - CSS variables declared in :root keep color choices centralized.
+  - The canvas is styled to be responsive in width while remaining square; pixel-perfect rendering is improved for high-DPI displays (see bottom).
+*/
+
+:root{
+  --bg:#0b1b2b;      /* page background tone */
+  --panel:#071622;   /* canvas / panel background */
+  --accent:#7bed9f;  /* accent color used for headings / snake head */
+  --muted:#9fb4c8;   /* muted text color */
+}
+
+/* Basic page layout and typography */
+html,body{
+  height:100%;
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+}
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(180deg,#071426 0%, #0b1b2b 100%);
+  color:var(--muted);
+}
+
+/* Main container sizing */
+main{width:720px;max-width:95%;padding:20px}
+
+/* Heading */
+h1{color:var(--accent);margin:0 0 8px}
+
+/* HUD layout (score + status) */
+.hud{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+
+/* Canvas look: rounded panel with shadow.
+   Limit the visible size with max-width so the game box appears smaller.
+   Use aspect-ratio to keep the canvas square while allowing responsive width. */
+#game{
+  display:block;
+  width:100%;
+  max-width:480px; /* make the visible game box smaller */
+  aspect-ratio: 1/1; /* keep square */
+  background:var(--panel);
+  border-radius:8px;
+  box-shadow:0 6px 30px rgba(0,0,0,0.6);
+}
+
+/* High score visuals and blink animation when surpassed */
+#highscore{
+  color:var(--accent);
+  font-weight:600;
+  margin-left:12px;
+}
+
+@keyframes blink {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.blink{
+  animation: blink 0.6s ease-in-out 0s 3; /* play 3 iterations (about 1.8s) */
+}
+
+/* Controls row */
+.controls{margin-top:10px;display:flex;gap:10px;align-items:center}
+
+/* Buttons */
+button{background:#123046;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 12px;border-radius:6px;cursor:pointer}
+button:hover{filter:brightness(1.06)}
+
+/* Small help text */
+.help{margin-top:12px;color:var(--muted);font-size:14px}
+label{color:var(--muted)}
+
+/* Make canvas drawing appear crisp on high-DPI displays */
+/* Note: we also adjust the backing store size in JS (devicePixelRatio) */
+canvas{image-rendering:pixelated}
